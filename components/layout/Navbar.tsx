@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [language, setLanguage] = useState("EN");
 
   const menuItems = [
     { name: "Home", link: "#home" },
@@ -19,99 +20,146 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/20 bg-white/90 shadow-lg backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-gray-200 bg-white/90 shadow-lg backdrop-blur-md">
 
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
 
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-4">
+        <a href="#home" className="flex items-center gap-3">
+
           <Image
             src="/images/apc-logo.jpg"
             alt="APC Logo"
-            width={60}
-            height={60}
+            width={55}
+            height={55}
             priority
             className="rounded-full"
           />
 
           <div>
-            <h1 className="text-2xl font-extrabold text-green-700">
+            <h1 className="text-xl font-extrabold text-green-700 md:text-2xl">
               GAJERE 2027
             </h1>
 
-            <p className="text-sm text-gray-500">
+            <p className="hidden text-xs text-gray-500 sm:block">
               Kebbi South Senatorial Campaign
             </p>
           </div>
+
         </a>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden items-center gap-7 md:flex">
+
+        {/* Desktop Menu */}
+        <ul className="hidden items-center gap-6 lg:flex">
 
           {menuItems.map((item) => (
+
             <li key={item.name}>
+
               <a
                 href={item.link}
-                className="relative font-semibold text-gray-700 transition-colors duration-300 hover:text-green-700 after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-green-700 after:transition-all after:duration-300 hover:after:w-full"
+                className="relative font-semibold text-gray-700 transition hover:text-green-700 after:absolute after:-bottom-1 after:left-0 after:h-[2px] after:w-0 after:bg-green-700 after:transition-all hover:after:w-full"
               >
                 {item.name}
               </a>
+
             </li>
+
           ))}
 
         </ul>
 
-        {/* Desktop Button */}
-        <a
-          href="#volunteer"
-          className="hidden rounded-xl bg-green-700 px-6 py-3 font-bold text-white transition duration-300 hover:-translate-y-0.5 hover:bg-green-800 md:block"
-        >
-          Join Us
-        </a>
 
-        {/* Mobile Button */}
+        {/* Right Side */}
+        <div className="hidden items-center gap-3 md:flex">
+
+
+          {/* Language Switch */}
+          <button
+            onClick={() => setLanguage(language === "EN" ? "HA" : "EN")}
+            className="rounded-lg border border-green-700 px-3 py-2 text-sm font-bold text-green-700 transition hover:bg-green-700 hover:text-white"
+          >
+            {language}
+          </button>
+
+
+          {/* Join Button */}
+          <a
+            href="#volunteer"
+            className="rounded-xl bg-green-700 px-6 py-3 font-bold text-white shadow-md transition hover:-translate-y-1 hover:bg-green-800"
+          >
+            Join Us
+          </a>
+
+
+        </div>
+
+
+        {/* Mobile Menu Button */}
         <button
           onClick={() => setOpen(!open)}
           aria-label="Toggle navigation menu"
-          aria-expanded={open}
-          className="text-3xl font-bold text-green-700 transition md:hidden"
+          className="text-3xl text-green-700 md:hidden"
         >
           {open ? "✕" : "☰"}
         </button>
 
+
       </nav>
 
-      {/* Mobile Navigation */}
+
+      {/* Mobile Menu */}
+
       {open && (
-        <div className="border-t bg-white shadow-lg md:hidden">
+
+        <div className="border-t bg-white shadow-xl md:hidden">
 
           <ul className="space-y-1 px-6 py-5">
 
             {menuItems.map((item) => (
+
               <li key={item.name}>
+
                 <a
                   href={item.link}
                   onClick={() => setOpen(false)}
-                  className="block rounded-lg px-4 py-3 font-semibold text-gray-700 transition hover:bg-green-50 hover:text-green-700"
+                  className="block rounded-lg px-4 py-3 font-semibold text-gray-700 hover:bg-green-50 hover:text-green-700"
                 >
                   {item.name}
                 </a>
+
               </li>
+
             ))}
 
-            <li className="pt-4">
+
+            <li className="pt-3">
+
+              <button
+                onClick={() =>
+                  setLanguage(language === "EN" ? "HA" : "EN")
+                }
+                className="mb-3 w-full rounded-lg border border-green-700 py-3 font-bold text-green-700"
+              >
+                Language: {language}
+              </button>
+
+
               <a
                 href="#volunteer"
                 onClick={() => setOpen(false)}
-                className="block rounded-xl bg-green-700 px-4 py-3 text-center font-bold text-white transition hover:bg-green-800"
+                className="block rounded-xl bg-green-700 px-4 py-3 text-center font-bold text-white"
               >
                 Join Us
               </a>
+
             </li>
+
 
           </ul>
 
         </div>
+
       )}
 
     </header>

@@ -25,6 +25,11 @@ export default function Hero() {
           </div>
 
 
+          <div className="mt-5 inline-flex rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-green-100">
+            APC Senatorial Candidate
+          </div>
+
+
           <p className="mt-6 text-lg font-semibold uppercase tracking-[0.3em] text-yellow-300">
             Leadership • Security • Development • Unity
           </p>
@@ -42,7 +47,6 @@ export default function Hero() {
           </p>
 
 
-          {/* Buttons */}
           <div className="mt-10 flex flex-col gap-4 sm:flex-row">
 
             <a
@@ -63,7 +67,6 @@ export default function Hero() {
           </div>
 
 
-          {/* Campaign Highlights */}
           <div className="mt-12 rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-md">
 
             <h3 className="mb-5 text-xl font-bold">
@@ -81,7 +84,6 @@ export default function Hero() {
           </div>
 
 
-          {/* Statistics */}
           <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
 
             {[
@@ -90,10 +92,12 @@ export default function Hero() {
               {value:24, suffix:"/7", text:"Service"},
               {value:2027, suffix:"", text:"Vision"},
             ].map((item)=>(
+
               <div
                 key={item.text}
                 className="rounded-2xl border border-white/10 bg-white/10 p-5 text-center backdrop-blur-md transition duration-300 hover:-translate-y-2 hover:bg-white/20"
               >
+
                 <h3 className="text-3xl font-bold text-yellow-300">
                   <Counter end={item.value} suffix={item.suffix}/>
                 </h3>
@@ -103,6 +107,7 @@ export default function Hero() {
                 </p>
 
               </div>
+
             ))}
 
           </div>
@@ -126,9 +131,29 @@ export default function Hero() {
               width={450}
               height={560}
               priority
-              className="object-cover"
+              className="h-auto w-full object-cover"
             />
 
+
+            {/* Image Badge */}
+            <div className="absolute bottom-0 left-0 right-0 bg-green-900/90 p-5 text-center text-white">
+
+              <h3 className="text-xl font-bold">
+                General Jafaru Mohammed Gajere (Rtd)
+              </h3>
+
+              <p className="text-sm text-yellow-300">
+                Kebbi South 2027
+              </p>
+
+            </div>
+
+
+          </div>
+
+
+          <div className="absolute -right-4 top-10 rounded-full bg-yellow-400 px-6 py-3 font-extrabold text-green-900 shadow-xl">
+            2027
           </div>
 
 

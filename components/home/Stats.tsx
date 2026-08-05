@@ -1,4 +1,32 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+
 export default function Stats() {
+  const [volunteers, setVolunteers] = useState(0);
+
+  useEffect(() => {
+    async function getVolunteerCount() {
+      const { count, error } = await supabase
+        .from("volunteers")
+        .select("*", { count: "exact", head: true });
+
+      if (error) {
+        console.log("Supabase Error:", error);
+        return;
+      }
+
+      console.log("Volunteer Count:", count);
+
+      if (count !== null) {
+        setVolunteers(count);
+      }
+    }
+
+    getVolunteerCount();
+  }, []);
+
   const stats = [
     {
       number: "21+",
@@ -9,7 +37,7 @@ export default function Stats() {
       label: "Communities",
     },
     {
-      number: "5,000+",
+      number: `${volunteers}+`,
       label: "Supporters",
     },
     {

@@ -1,13 +1,16 @@
 import Navbar from "@/components/layout/Navbar";
 import Hero from "@/components/home/Hero";
+import Countdown from "@/components/home/Countdown";
 import About from "@/components/home/About";
 import Biography from "@/components/home/Biography";
+import Message from "@/components/home/Message";
 import Vision from "@/components/home/Vision";
 import Manifesto from "@/components/home/Manifesto";
 import Priorities from "@/components/home/Priorities";
 import Stats from "@/components/home/Stats";
 import News from "@/components/home/News";
 import Gallery from "@/components/home/Gallery";
+import JoinMovement from "@/components/home/JoinMovement";
 import Volunteer from "@/components/home/Volunteer";
 import FadeIn from "@/components/ui/FadeIn";
 import Footer from "@/components/layout/Footer";
@@ -23,6 +26,11 @@ export default function Home() {
         {/* Hero Section */}
         <Hero />
 
+        {/* Campaign Countdown */}
+        <FadeIn>
+          <Countdown />
+        </FadeIn>
+
         {/* About Candidate */}
         <FadeIn>
           <About />
@@ -31,6 +39,11 @@ export default function Home() {
         {/* Biography & Leadership Timeline */}
         <FadeIn>
           <Biography />
+        </FadeIn>
+
+        {/* Message from General Gajere */}
+        <FadeIn>
+          <Message />
         </FadeIn>
 
         {/* Vision & Mission */}
@@ -61,6 +74,11 @@ export default function Home() {
         {/* Campaign Gallery */}
         <FadeIn>
           <Gallery />
+        </FadeIn>
+
+        {/* Join the Movement */}
+        <FadeIn>
+          <JoinMovement />
         </FadeIn>
 
         {/* Volunteer Registration */}
