@@ -1,44 +1,42 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { supabase } from "@/lib/supabase";
+
+type GalleryItem = {
+  id: number;
+  title: string;
+  description: string;
+  image_url: string;
+  category: string;
+  created_at: string;
+};
 
 export default function Gallery() {
-  const gallery = [
-    {
-      image: "/images/gallery/community.jpg",
-      title: "Community Engagement",
-      description:
-        "Meeting with residents across Kebbi South to listen to their concerns and aspirations.",
-    },
-    {
-      image: "/images/gallery/traditional-rulers.jpg",
-      title: "Traditional Leaders",
-      description:
-        "Consultations with traditional rulers to strengthen unity and development.",
-    },
-    {
-      image: "/images/gallery/youth.jpg",
-      title: "Youth Empowerment",
-      description:
-        "Supporting education, skills development, and entrepreneurship for young people.",
-    },
-    {
-      image: "/images/gallery/townhall.jpg",
-      title: "Town Hall Meeting",
-      description:
-        "Open discussions with citizens on policies, progress, and future plans.",
-    },
-    {
-      image: "/images/gallery/agriculture.jpg",
-      title: "Agricultural Support",
-      description:
-        "Promoting modern farming, food security, and economic opportunities.",
-    },
-    {
-      image: "/images/gallery/outreach.jpg",
-      title: "Community Outreach",
-      description:
-        "Working together with communities to improve healthcare, infrastructure, and quality of life.",
-    },
-  ];
+  const [gallery, setGallery] = useState<GalleryItem[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchGallery() {
+      const { data, error } = await supabase
+        .from("gallery")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Gallery Error:", error);
+        setLoading(false);
+        return;
+      }
+
+      setGallery(data || []);
+      setLoading(false);
+    }
+
+    fetchGallery();
+  }, []);
+
 
   return (
     <section
@@ -66,19 +64,33 @@ export default function Gallery() {
         </div>
 
 
+        {loading && (
+          <div className="mt-16 text-center text-gray-500">
+            Loading gallery...
+          </div>
+        )}
+
+
+        {!loading && gallery.length === 0 && (
+          <div className="mt-16 text-center text-gray-500">
+            No gallery images available yet.
+          </div>
+        )}
+
+
         <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
 
           {gallery.map((item) => (
 
             <div
-              key={item.title}
+              key={item.id}
               className="group overflow-hidden rounded-3xl border border-gray-100 bg-white shadow-lg transition duration-500 hover:-translate-y-2 hover:shadow-2xl"
             >
 
               <div className="relative h-64 w-full overflow-hidden bg-gray-200">
 
                 <Image
-                  src={item.image}
+                  src={item.image_url}
                   alt={item.title}
                   fill
                   sizes="(max-width:768px) 100vw, (max-width:1200px) 50vw, 33vw"
@@ -92,7 +104,11 @@ export default function Gallery() {
 
               <div className="p-6">
 
-                <h3 className="text-2xl font-bold text-green-700">
+                <span className="text-sm font-semibold text-gray-500">
+                  {item.category}
+                </span>
+
+                <h3 className="mt-2 text-2xl font-bold text-green-700">
                   {item.title}
                 </h3>
 
