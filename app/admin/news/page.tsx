@@ -1,8 +1,8 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { Plus, Search, Trash2 } from "lucide-react";
+import { Plus, Search, Trash2, Pencil } from "lucide-react";
 import { supabase } from "@/lib/supabase";
 
 
@@ -240,7 +240,15 @@ export default function NewsPage() {
 
 
 
-              <button
+              <Link
+  href={`/admin/news/${item.id}`}
+  className="rounded-lg bg-green-600 p-2 text-white hover:bg-green-700"
+  title="Edit news"
+>
+  <Pencil size={18}/>
+</Link>
+
+<button
 
                 onClick={() => deleteNews(item.id)}
 
@@ -271,3 +279,4 @@ export default function NewsPage() {
   );
 
 }
+

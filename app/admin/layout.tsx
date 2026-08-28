@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,8 @@ export default function AdminLayout({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let mounted = true;
+
     async function checkSession() {
       const {
         data: { session },
@@ -27,17 +29,32 @@ export default function AdminLayout({
         return;
       }
 
-      setLoading(false);
+      if (mounted) {
+        setLoading(false);
+      }
     }
 
     checkSession();
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (!session) {
+        router.replace("/login");
+      }
+    });
+
+    return () => {
+      mounted = false;
+      subscription.unsubscribe();
+    };
   }, [router]);
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <h2 className="text-xl font-semibold">
-          Loading...
+      <div className="flex min-h-screen items-center justify-center bg-gray-100">
+        <h2 className="text-xl font-semibold text-gray-700">
+          Loading Admin...
         </h2>
       </div>
     );

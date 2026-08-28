@@ -1,6 +1,5 @@
-"use client";
+﻿"use client";
 
-import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/lib/supabase";
 
@@ -9,46 +8,14 @@ import VolunteerTable from "@/components/admin/VolunteerTable";
 
 export default function DashboardPage() {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    async function checkUser() {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-
-      if (!session) {
-        router.replace("/login");
-        return;
-      }
-
-      setLoading(false);
-    }
-
-    checkUser();
-  }, [router]);
-
 
   async function handleLogout() {
     await supabase.auth.signOut();
     router.push("/login");
   }
 
-
-  if (loading) {
-    return (
-      <main className="flex min-h-screen items-center justify-center bg-gray-100">
-        <p className="text-lg font-semibold text-gray-700">
-          Loading Dashboard...
-        </p>
-      </main>
-    );
-  }
-
-
   return (
     <main className="min-h-screen bg-gray-100 p-8">
-
       <div className="mx-auto max-w-7xl">
 
         <div className="mb-8 flex items-center justify-between rounded-2xl bg-white p-6 shadow">
@@ -63,7 +30,6 @@ export default function DashboardPage() {
             </p>
           </div>
 
-
           <button
             onClick={handleLogout}
             className="rounded-xl bg-red-600 px-5 py-3 font-semibold text-white transition hover:bg-red-700"
@@ -73,9 +39,7 @@ export default function DashboardPage() {
 
         </div>
 
-
         <DashboardStats />
-
 
         <div className="mt-10 rounded-2xl bg-white p-6 shadow">
 
@@ -87,9 +51,7 @@ export default function DashboardPage() {
 
         </div>
 
-
       </div>
-
     </main>
   );
 }

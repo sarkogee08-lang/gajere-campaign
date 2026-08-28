@@ -70,7 +70,6 @@ export default function Footer() {
 
               <p>📧 info@gajere2027.org</p>
 
-              <p>📞 +234 9166141916</p>
 
             </div>
           </div>

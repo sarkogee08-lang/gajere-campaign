@@ -1,7 +1,13 @@
+﻿"use client";
+
 import Image from "next/image";
 import Counter from "@/components/ui/Counter";
+import { useLanguage } from "@/components/language/LanguageContext";
+import { translations } from "@/components/language/translations";
 
 export default function Hero() {
+  const { language } = useLanguage();
+  const t = translations[language].hero;
   return (
     <section
       id="home"
@@ -21,17 +27,17 @@ export default function Hero() {
         <div>
 
           <div className="inline-flex items-center rounded-full border border-yellow-300/40 bg-yellow-400/15 px-6 py-3 text-sm font-bold tracking-wide text-yellow-200 backdrop-blur-md">
-            🇳🇬 Kebbi South Senatorial Election 2027
+            🇳🇬 {t.election}
           </div>
 
 
           <div className="mt-5 inline-flex rounded-full bg-white/10 px-5 py-2 text-sm font-semibold text-green-100">
-            APC Senatorial Candidate
+            {t.candidate}
           </div>
 
 
           <p className="mt-6 text-lg font-semibold uppercase tracking-[0.3em] text-yellow-300">
-            Leadership • Security • Development • Unity
+            {t.slogan}
           </p>
 
 
@@ -41,9 +47,7 @@ export default function Hero() {
 
 
           <p className="mt-6 max-w-xl text-lg leading-8 text-green-100">
-            Building a stronger Kebbi South through visionary leadership,
-            inclusive governance, youth empowerment, economic growth,
-            and sustainable community development.
+            {t.description}
           </p>
 
 
@@ -53,7 +57,7 @@ export default function Hero() {
               href="#manifesto"
               className="rounded-xl bg-yellow-400 px-8 py-4 text-center font-bold text-green-900 shadow-xl transition duration-300 hover:-translate-y-1 hover:scale-105 hover:bg-yellow-300"
             >
-              Read Manifesto
+              {t.manifesto}
             </a>
 
 
@@ -61,7 +65,7 @@ export default function Hero() {
               href="#volunteer"
               className="rounded-xl border-2 border-white px-8 py-4 text-center font-bold transition duration-300 hover:-translate-y-1 hover:bg-white hover:text-green-800"
             >
-              Join the Movement
+              {t.joinMovement}
             </a>
 
           </div>
@@ -70,15 +74,15 @@ export default function Hero() {
           <div className="mt-12 rounded-2xl border border-white/10 bg-white/10 p-6 backdrop-blur-md">
 
             <h3 className="mb-5 text-xl font-bold">
-              Campaign Highlights
+              {t.highlights}
             </h3>
 
 
             <ul className="space-y-3 text-green-100">
-              <li>✔ Transparent Leadership</li>
-              <li>✔ Youth Empowerment & Job Creation</li>
-              <li>✔ Security & Community Development</li>
-              <li>✔ Agricultural Growth & Economic Prosperity</li>
+              <li>✔ {t.transparentLeadership}</li>
+              <li>✔ {t.youthEmpowerment}</li>
+              <li>✔ {t.securityDevelopment}</li>
+              <li>✔ {t.agriculturalGrowth}</li>
             </ul>
 
           </div>
@@ -87,10 +91,10 @@ export default function Hero() {
           <div className="mt-8 grid grid-cols-2 gap-4 md:grid-cols-4">
 
             {[
-              {value:30, suffix:"+", text:"Years of Leadership"},
-              {value:100, suffix:"%", text:"Commitment"},
-              {value:24, suffix:"/7", text:"Service"},
-              {value:2027, suffix:"", text:"Vision"},
+              {value:30, suffix:"+", text:t.yearsLeadership},
+              {value:100, suffix:"%", text:t.commitment},
+              {value:24, suffix:"/7", text:t.service},
+              {value:2027, suffix:"", text:t.vision},
             ].map((item)=>(
 
               <div
@@ -143,7 +147,7 @@ export default function Hero() {
               </h3>
 
               <p className="text-sm text-yellow-300">
-                Kebbi South 2027
+                {t.kebbiSouth}
               </p>
 
             </div>
@@ -166,3 +170,4 @@ export default function Hero() {
     </section>
   );
 }
+

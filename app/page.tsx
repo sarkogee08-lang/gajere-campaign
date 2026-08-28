@@ -1,4 +1,5 @@
-import Navbar from "@/components/layout/Navbar";
+﻿import Navbar from "@/components/layout/Navbar";
+import { LanguageProvider } from "@/components/language/LanguageContext";
 import Hero from "@/components/home/Hero";
 import Countdown from "@/components/home/Countdown";
 import About from "@/components/home/About";
@@ -17,79 +18,64 @@ import Footer from "@/components/layout/Footer";
 
 export default function Home() {
   return (
-    <>
-      {/* Navigation */}
+    <LanguageProvider>
       <Navbar />
 
       <main className="min-h-screen scroll-smooth bg-white pt-20">
 
-        {/* Hero Section */}
         <Hero />
 
-        {/* Campaign Countdown */}
         <FadeIn>
           <Countdown />
         </FadeIn>
 
-        {/* About Candidate */}
         <FadeIn>
           <About />
         </FadeIn>
 
-        {/* Biography & Leadership Timeline */}
         <FadeIn>
           <Biography />
         </FadeIn>
 
-        {/* Message from General Gajere */}
         <FadeIn>
           <Message />
         </FadeIn>
 
-        {/* Vision & Mission */}
         <FadeIn>
           <Vision />
         </FadeIn>
 
-        {/* Manifesto */}
         <FadeIn>
           <Manifesto />
         </FadeIn>
 
-        {/* Campaign Priorities */}
         <FadeIn>
           <Priorities />
         </FadeIn>
 
-        {/* Campaign Statistics */}
         <FadeIn>
           <Stats />
         </FadeIn>
 
-        {/* News & Updates */}
         <FadeIn>
           <News />
         </FadeIn>
 
-        {/* Campaign Gallery */}
         <FadeIn>
           <Gallery />
         </FadeIn>
 
-        {/* Join the Movement */}
         <FadeIn>
           <JoinMovement />
         </FadeIn>
 
-        {/* Volunteer Registration */}
         <FadeIn>
           <Volunteer />
         </FadeIn>
 
       </main>
 
-      {/* Website Footer */}
       <Footer />
-    </>
+    </LanguageProvider>
   );
 }

@@ -2,10 +2,11 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { useLanguage } from "@/components/language/LanguageContext";
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const [language, setLanguage] = useState("EN");
+  const { language, toggleLanguage } = useLanguage();
 
   const menuItems = [
     { name: "Home", link: "#home" },
@@ -76,10 +77,10 @@ export default function Navbar() {
 
           {/* Language Switch */}
           <button
-            onClick={() => setLanguage(language === "EN" ? "HA" : "EN")}
+            onClick={toggleLanguage}
             className="rounded-lg border border-green-700 px-3 py-2 text-sm font-bold text-green-700 transition hover:bg-green-700 hover:text-white"
           >
-            {language}
+            {language === "en" ? "HA" : "EN"}
           </button>
 
 
@@ -137,11 +138,11 @@ export default function Navbar() {
 
               <button
                 onClick={() =>
-                  setLanguage(language === "EN" ? "HA" : "EN")
+                  toggleLanguage()
                 }
                 className="mb-3 w-full rounded-lg border border-green-700 py-3 font-bold text-green-700"
               >
-                Language: {language}
+                Language: {language === "en" ? "HA" : "EN"}
               </button>
 
 
@@ -165,3 +166,5 @@ export default function Navbar() {
     </header>
   );
 }
+
+
